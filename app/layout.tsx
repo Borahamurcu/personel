@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { PersonelProvider } from "./personelContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,20 +26,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-        <nav className="bg-gray-800 p-4">
-          <Link href="/" className="text-white text-lg font-semibold">
+          <nav className="bg-gray-800 p-4">
+            <Link href="/" className="text-white text-lg font-semibold">
             Giriş Ekranı
           </Link>
           <span className="mx-4 text-gray-400">|</span>
-          <Link href="/personeller" className="text-white text-lg font-semibold">
+          <Link href="/ListeSayfasi" className="text-white text-lg font-semibold">
             Personeller
           </Link>
           <span className="mx-4 text-gray-400">|</span>
-          <Link href="/personelekle" className="text-white text-lg font-semibold">
+          <Link href="/EklemeSayfasi" className="text-white text-lg font-semibold">
             Personel Ekle
           </Link>
           <span className="mx-4 text-gray-400">|</span>
