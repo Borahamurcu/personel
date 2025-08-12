@@ -1,6 +1,5 @@
 'use client';
-import {  PersonelProvider , usePersonelContext} from "../personelContext";
-import AddForm from "../components/AddForm";
+import {  PersonelProvider } from "../personelContext";
 import ListelemeSayfasi from "../components/Listelemesayfasi";
 
 
