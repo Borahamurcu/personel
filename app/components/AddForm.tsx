@@ -1,10 +1,9 @@
 'use client';
 import { useState } from "react";
-import { usePersonelContext } from "../personelContext";
+
 
 
 function AddForm() {
-    const { personel, addPersonel } = usePersonelContext();
     const [yeniPersonel, setYeniPersonel] = useState({
         isim: "",
         soyisim: "",
@@ -13,10 +12,9 @@ function AddForm() {
         cv: ""
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const yeniKisi = { ...yeniPersonel };
-        const mevcutpersonellist = JSON.parse(localStorage.getItem('personelListesi')) || [];
+        const mevcutpersonellist = JSON.parse(localStorage.getItem('personelListesi')|| "[]") ;
         const yeniListe = [...mevcutpersonellist, yeniPersonel];
         localStorage.setItem('personelListesi', JSON.stringify(yeniListe));
         setYeniPersonel({

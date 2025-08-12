@@ -1,50 +1,61 @@
-'use client';
+"use client";
+import React from "react";
 import { createContext, useContext, useState } from "react";
 
 type Personel = {
-    id: number;
-    isim: string;
-    soyisim: string;
-    yas: number;
-    emekli: boolean;
-    cv: string;
+  id: number;
+  isim: string;
+  soyisim: string;
+  yas: number;
+  emekli: boolean;
+  cv: string;
 };
 
 type PersonelContextType = {
-    personel: Personel[];
-    addPersonel: (newPersonel: Personel) => void;
+  personel: Personel[];
+  addPersonel: (newPersonel: Personel) => void;
 };
 
-const PersonelContext = createContext<PersonelContextType | undefined>(undefined);
+const PersonelContext = createContext<PersonelContextType | undefined>(
+  undefined
+);
 
-export const PersonelProvider = ({ children }: { children: React.ReactNode }) => {
-    const [personel, setPersonel] = useState<Personel[]>(() => {
-        if (typeof window !== 'undefined') {
-            const stored = localStorage.getItem('personelListesi');
-            return stored ? JSON.parse(stored) : [];
-        }
-        return [];
-    });
+export const PersonelProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [personel, setPersonel] = useState<Personel[]>([]);
 
-    const addPersonel = (newPersonel: Personel) => {
-        setPersonel((p) => {
-            const updated = [...p, newPersonel];
-            localStorage.setItem('personelListesi', JSON.stringify(updated));
-            return updated;
-        });
-    };
-
-    return (
-        <PersonelContext.Provider value={{ personel, addPersonel }}>
-            {children}
-        </PersonelContext.Provider>
+  React.useEffect(() => {
+    const savedPersonels = JSON.parse(
+      localStorage?.getItem("personelListesi") ?? "[]"
     );
+
+    if (savedPersonels) setPersonel([...savedPersonels]);
+  }, []);
+
+  const addPersonel = (newPersonel: Personel) => {
+    setPersonel((p) => {
+      const updated = [...p, newPersonel];
+      localStorage.setItem("personelListesi", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  return (
+    <PersonelContext value={{ personel, addPersonel }}>
+      {children}
+    </PersonelContext>
+  );
 };
 
 export const usePersonelContext = () => {
-    const context = useContext(PersonelContext);
-    if (!context) {
-        throw new Error('usePersonelContext must be used within a PersonelProvider');
-    }
-    return context;
+  const context = useContext(PersonelContext);
+  if (!context) {
+    throw new Error(
+      "usePersonelContext must be used within a PersonelProvider"
+    );
+  }
+  return context;
 };
