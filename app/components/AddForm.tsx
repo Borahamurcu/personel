@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { usePersonelContext } from "../personelContext";
 
+
 function AddForm() {
     const { personel, addPersonel } = usePersonelContext();
     const [yeniPersonel, setYeniPersonel] = useState({
@@ -14,7 +15,10 @@ function AddForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addPersonel(yeniPersonel);
+        const yeniKisi = { ...yeniPersonel };
+        const mevcutpersonellist = JSON.parse(localStorage.getItem('personelListesi')) || [];
+        const yeniListe = [...mevcutpersonellist, yeniPersonel];
+        localStorage.setItem('personelListesi', JSON.stringify(yeniListe));
         setYeniPersonel({
             isim: "",
             soyisim: "",
@@ -25,7 +29,7 @@ function AddForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 background-black p-6 rounded shadow-md text-black">
+        <form onSubmit={handleSubmit} className="space-y-4 p-6 rounded shadow-md text-black">
             <input 
                 type="text" 
                 value={yeniPersonel.isim} 
@@ -47,7 +51,7 @@ function AddForm() {
                 className="w-full p-2 border border-gray-300 rounded"
                 onChange={(e) => setYeniPersonel({ ...yeniPersonel, yas: Number(e.target.value) })}
             />
-            <p>Emekli mi?</p>
+            <label>Emekli mi?</label>
             <input
                 type="checkbox"
                 checked={yeniPersonel.emekli}
