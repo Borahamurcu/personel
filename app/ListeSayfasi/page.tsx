@@ -3,13 +3,13 @@ import {  PersonelProvider } from "../personelContext";
 import ListelemeSayfasi from "../components/Listelemesayfasi";
 
 
-export  function Liste() {
+export function Liste() {
    
-   return( <>
+   return( <div>
     <PersonelProvider>
     <ListelemeSayfasi/>
     </PersonelProvider>
-    </>  );
+    </div>  );
 }
 
 
