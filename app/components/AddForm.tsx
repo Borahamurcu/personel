@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
+import { Personel } from "../personelContext";
 
 function AddForm() {
-  const [yeniPersonel, setYeniPersonel] = useState({
+  const [yeniPersonel, setYeniPersonel] = useState<Personel>({
     isim: "",
     soyisim: "",
     yas: "",
@@ -54,7 +55,10 @@ function AddForm() {
         value={yeniPersonel.yas}
         className="w-full p-2 border border-gray-300 rounded"
         onChange={(e) =>
-          setYeniPersonel({ ...yeniPersonel, yas: Number(e.target.value) })
+          setYeniPersonel({
+            ...yeniPersonel,
+            yas: !isNaN(+e.target.value) ? +e.target.value : "",
+          })
         }
       />
       <label>

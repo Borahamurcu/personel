@@ -2,11 +2,10 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
 
-type Personel = {
-  id: number;
+export type Personel = {
   isim: string;
   soyisim: string;
-  yas: number;
+  yas: string|number;
   emekli: boolean;
   cv: string;
 };
