@@ -53,7 +53,8 @@ function AddForm() {
       <input
         type="number"
         value={yeniPersonel.yas}
-        className="w-full p-2 border border-gray-300 rounded"
+        placeholder="Yaş" 
+        className="w-full p-2 border border-gray-300 rounded no-spinner"
         onChange={(e) =>
           setYeniPersonel({
             ...yeniPersonel,
