@@ -1,5 +1,5 @@
-import { PersonelProvider } from "../personelContext";
 import ListelemeSayfasi from "../components/ListelemeSayfasi";
+import { PersonelProvider } from "../personelContext";
 
 function Page() {
   return (
