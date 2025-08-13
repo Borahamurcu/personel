@@ -5,7 +5,7 @@ function AddForm() {
   const [yeniPersonel, setYeniPersonel] = useState({
     isim: "",
     soyisim: "",
-    yas: 0,
+    yas: "",
     emekli: false,
     cv: "",
   });
@@ -20,7 +20,7 @@ function AddForm() {
     setYeniPersonel({
       isim: "",
       soyisim: "",
-      yas: 0,
+      yas: "",
       emekli: false,
       cv: "",
     });
@@ -57,19 +57,21 @@ function AddForm() {
           setYeniPersonel({ ...yeniPersonel, yas: Number(e.target.value) })
         }
       />
-      <label>Emekli mi?</label>
-      <input
-        type="checkbox"
-        checked={yeniPersonel.emekli}
-        className="mr-2"
-        onChange={(e) =>
-          setYeniPersonel({ ...yeniPersonel, emekli: e.target.checked })
-        }
-      />
+      <label>
+        Emekli mi?
+        <input
+          type="checkbox"
+          checked={yeniPersonel.emekli}
+          className="mr-2"
+          onChange={(e) =>
+            setYeniPersonel({ ...yeniPersonel, emekli: e.target.checked })
+          }
+        />
+      </label>
       <input
         type="text"
         value={yeniPersonel.cv}
-        placeholder="CV Linki"
+        placeholder="CV"
         className="w-full p-2 border border-gray-300 rounded"
         onChange={(e) =>
           setYeniPersonel({ ...yeniPersonel, cv: e.target.value })
